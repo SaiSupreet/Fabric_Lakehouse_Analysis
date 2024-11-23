@@ -63,9 +63,5 @@ This project demonstrates an end-to-end workflow for analyzing sales data using 
 - **Machine Learning Integration**: Use Spark MLlib to predict sales trends based on historical data.
 - **Dashboard Creation**: Leverage Power BI to create interactive dashboards from the transformed data.
 
-## Conclusion
-This project highlights the capabilities of Microsoft Fabric lakehouse when combined with Apache Spark for efficient data processing, analysis, and visualization. It serves as a great starting point for analysts and engineers looking to perform end-to-end big data analysis in an integrated environment.
 
-## License
-MIT License. Feel free to use and adapt as needed.
 
