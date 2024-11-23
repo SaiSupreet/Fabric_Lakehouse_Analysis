@@ -60,15 +60,4 @@ plt.show()
 - **Flexibility**: Combines the schema-on-read flexibility of data lakes with SQL-based data processing.
 - **Centralized Data Management**: A single location for data storage, management, and access for different analytics roles.
 
-## Getting Started
-- Clone this repository and import it to your Microsoft Fabric environment.
-- Run through the steps in the notebook to understand how to load, transform, and visualize data.
 
-## License
-This project is licensed under the MIT License.
-
-## Contribution
-Feel free to submit pull requests or report issues. Collaboration is highly encouraged!
-
-## Contact
-If you have any questions or need further clarification, please open an issue on GitHub.
