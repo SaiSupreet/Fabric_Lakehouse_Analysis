@@ -1,71 +1,71 @@
-# Fabric Lakehouse Analysis with PySpark and Spark SQL
+# Fabric Lakehouse Analysis with PySpark, Spark SQL, and Visualization
 
 ## Overview
-This project provides a comprehensive data analysis solution using Microsoft Fabric Lakehouse, integrating with PySpark, Spark SQL, and visualization libraries such as Matplotlib and Seaborn. The key focus is to demonstrate how data engineers and data scientists can work with big data in a Lakehouse environment, covering data ingestion, processing, and visualization.
+This project demonstrates an end-to-end workflow for analyzing sales data using Microsoft Fabric, Apache Spark, and various Python-based tools for data manipulation and visualization. The project aims to showcase the integration between Fabric's lakehouse capabilities and powerful data processing techniques using Spark and visualization libraries like `matplotlib` and `seaborn`.
 
 ## Key Features
-- **Data Ingestion**: Load CSV files into a Spark DataFrame using predefined schemas for structured data.
-- **Data Transformation**: Filter, group, and modify data using Spark DataFrame APIs. Add new columns such as Year, Month, FirstName, and LastName for enriched analysis.
-- **Data Aggregation**: Aggregate sales data by product and year to uncover trends, with simple transformations for meaningful insights.
-- **Data Persistence**: Save transformed data into partitioned Parquet files for optimized storage and access.
-- **Table Management**: Create Spark tables using the Delta format for SQL-based data exploration, supporting versioning and transactions.
-- **SQL Queries**: Use Spark SQL for querying and analyzing data in a familiar syntax, enabling flexible and powerful analysis workflows.
-- **Data Visualization**: Utilize Matplotlib and Seaborn to visualize aggregated results, providing meaningful insights through intuitive charts.
-
-## Project Structure
-The project is divided into several steps:
-
-1. **Create a DataFrame from CSV Files**: Load CSV data using a schema to create an initial Spark DataFrame.
-2. **Filter and Aggregate Data**: Utilize DataFrame transformations and filters to get relevant information, e.g., customer counts and product sales.
-3. **Transform the DataFrame**: Add and modify columns, such as deriving Year and Month from OrderDate and splitting CustomerName.
-4. **Save Data as Parquet**: Store the transformed data in an efficient, columnar storage format.
-5. **Partition Data by Year and Month**: Save partitioned data for improved query performance and organization.
-6. **Create and Query Spark Tables**: Save data as a Delta table and execute SQL queries to get summarized results.
-7. **Visualize Data**: Plot the data using Matplotlib and Seaborn for quick visual insights.
+- **Lakehouse Setup**: Create and manage a Microsoft Fabric lakehouse to store sales data files in CSV format.
+- **DataFrame Operations**: Use PySpark to ingest and process data, creating meaningful insights from sales data.
+- **Data Transformation**: Transform sales order data by adding new columns and performing data cleaning operations.
+- **Data Persistence**: Save transformed data in Parquet format and use partitioning for optimized storage and retrieval.
+- **Spark SQL Integration**: Create Spark-managed tables, write SQL queries to analyze the data, and generate reports.
+- **Data Visualization**: Visualize sales trends using built-in notebook visualization, as well as advanced charting with `matplotlib` and `seaborn`.
 
 ## Prerequisites
-- **Microsoft Fabric Trial**: A free trial of Microsoft Fabric is required to run the notebook and access the Spark pools.
-- **Python Libraries**: You need to install the following libraries: `matplotlib`, `seaborn`, and `pandas` for data visualization.
-- **Apache Spark**: Integrated with Microsoft Fabric to provide a scalable framework for big data analysis.
+- **Microsoft Fabric Trial**: Required to use the Fabric environment.
+- **Spark and PySpark**: Integrated tools for data ingestion and transformation.
+- **Matplotlib and Seaborn**: Python visualization libraries to create insights from processed data.
 
-## How to Run
-1. **Create a Workspace**: Start by creating a new workspace in Microsoft Fabric to manage all your data and notebooks.
-2. **Upload Data Files**: Add the CSV files (2019.csv, 2020.csv, and 2021.csv) to your Lakehouse.
-3. **Execute Notebook Cells**: Run the cells in the provided order to load data, transform it, create tables, and visualize the results.
+## Project Structure
+1. **Lakehouse Setup**
+   - Created a lakehouse using Microsoft Fabric.
+   - Uploaded CSV files (2019, 2020, 2021) representing sales data.
 
-## Data Ingestion Example
-The following PySpark code loads all CSV files into a DataFrame:
-```python
-orders_df = spark.read.format("csv").schema(orderSchema).load("Files/orders/*.csv")
-display(orders_df)
-```
+2. **Data Ingestion and DataFrame Creation**
+   - Used PySpark to read the CSV files into a Spark DataFrame.
+   - Defined an explicit schema for better data integrity.
 
-## Visualization Example
-To visualize revenue by year:
-```python
-from matplotlib import pyplot as plt
-df_sales = df_spark.toPandas()
-plt.clf()
-plt.bar(x=df_sales['OrderYear'], height=df_sales['GrossRevenue'], color='orange')
-plt.title('Revenue by Year')
-plt.xlabel('Year')
-plt.ylabel('Revenue')
-plt.grid(color='#95a5a6', linestyle='--', linewidth=2, axis='y', alpha=0.7)
-plt.xticks(rotation=45)
-plt.show()
-```
+3. **Data Exploration**
+   - Filtered customer data and computed distinct records.
+   - Aggregated data based on product sales and yearly performance.
 
-## Benefits of Using Fabric Lakehouse
-- **Scalability**: Built on Azure, Microsoft Fabric offers serverless scalability with Spark pools.
-- **Flexibility**: Combines the schema-on-read flexibility of data lakes with SQL-based data processing.
-- **Centralized Data Management**: A single location for data storage, management, and access for different analytics roles.
+4. **Data Transformation**
+   - Added columns like `Year`, `Month`, `FirstName`, and `LastName` for deeper insights.
+   - Reordered and removed irrelevant columns.
 
-## Getting Started
-- Clone this repository and import it to your Microsoft Fabric environment.
-- Run through the steps in the notebook to understand how to load, transform, and visualize data.
+5. **Data Persistence**
+   - Saved transformed data as Parquet for efficient retrieval.
+   - Partitioned data by `Year` and `Month` for better performance.
+
+6. **Spark SQL Integration**
+   - Saved the data as a Spark table.
+   - Ran SQL queries to generate revenue reports over time.
+
+7. **Data Visualization**
+   - Used built-in notebook charts for quick visualization.
+   - Created more sophisticated visualizations with `matplotlib` and `seaborn`.
+
+## How to Use
+1. **Setup Environment**: Ensure you have access to Microsoft Fabric with data engineering enabled.
+2. **Load Data**: Upload the CSV files into your Fabric lakehouse and use the provided notebook to process the data.
+3. **Run Analysis**: Use the Jupyter notebook or PySpark environment to transform and visualize the data.
+4. **Visualize Insights**: Utilize the charting features to interpret sales trends and customer data.
+
+## Commands Used
+- **Data Ingestion**: `spark.read.format("csv").schema(...)` to load CSV files.
+- **Data Transformation**: `.withColumn(...)` to add new fields, `.select(...)` to select specific columns.
+- **Data Persistence**: `.write.mode("overwrite").parquet(...)` to save data in an optimized format.
+- **SQL Queries**: `spark.sql(...)` to run SQL commands within Spark for analysis.
+- **Visualization**: `matplotlib` and `seaborn` for advanced charting options.
+
+## Future Scope
+- **Real-time Data Ingestion**: Implement real-time streaming into the lakehouse for continuous updates.
+- **Machine Learning Integration**: Use Spark MLlib to predict sales trends based on historical data.
+- **Dashboard Creation**: Leverage Power BI to create interactive dashboards from the transformed data.
+
+## Conclusion
+This project highlights the capabilities of Microsoft Fabric lakehouse when combined with Apache Spark for efficient data processing, analysis, and visualization. It serves as a great starting point for analysts and engineers looking to perform end-to-end big data analysis in an integrated environment.
 
 ## License
-This project is licensed under the MIT License.
+MIT License. Feel free to use and adapt as needed.
 
-## Contribution
-Feel free to submit pull requests or report issues. Collaboration is highly encouraged!
